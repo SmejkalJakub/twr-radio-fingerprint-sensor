@@ -65,23 +65,30 @@ typedef enum
     //! @brief Update event
     BC_FINGERPRINT_EVENT_UPDATE = 1,
 
+    //! @brief Template count event
     BC_FINGERPRINT_EVENT_TEMPLATE_COUNT_READ = 2,
 
-    BC_FINGERPRINT_EVENT_FINGERPRINT_MACHED = 3,
+    //! @brief Fingerprints mached event
+    BC_FINGERPRINT_EVENT_FINGERPRINT_MATCHED = 3,
 
+    //! @brief First Finger Enroll event
     BC_FINGERPRINT_EVENT_ENROLL_FIRST = 4,
 
+    //! @brief Second Finger Enroll event
     BC_FINGERPRINT_EVENT_ENROLL_SECOND = 5,
     
+    //! @brief Remove Finger From Sensor event
     BC_FINGERPRINT_EVENT_REMOVE_FINGER = 6,
 
+    //! @brief Finger Saved event
     BC_FINGERPRINT_EVENT_FINGER_ENROLLED = 7,
 
+    //! @brief Delete Database event
     BC_FINGERPRINT_EVENT_DATABASE_DELETED = 8
 
 } bc_fingerprint_event_t;
 
-//! @brief TMP112 instance
+//! @brief Fingerprint instance
 
 typedef struct bc_fingerprint_t bc_fingerprint_t;
 
@@ -108,7 +115,6 @@ typedef enum
     BC_FINGERPRINT_STATE_DELETE_DATABASE_READ = 15,
     BC_FINGERPRINT_STATE_UPDATE = 16,
     BC_FINGERPRINT_STATE_READY = 17
-    ,
 } bc_fingerprint_state_t;
 
 struct bc_fingerprint_t
@@ -139,7 +145,7 @@ struct bc_fingerprint_t
 
 bool bc_fingerprint_write_packet(void *data, size_t len);
 
-//! @brief Initialize TMP112
+//! @brief Initialize Fingerprint sensor
 //! @param[in] self Instance
 //! @param[in] i2c_channel I2C channel
 //! @param[in] i2c_address I2C device address
@@ -147,7 +153,7 @@ bool bc_fingerprint_write_packet(void *data, size_t len);
 void bc_fingerprint_init(bc_fingerprint_t *self, bc_uart_channel_t channel);
 
 
-//! @brief Deinitialize TMP112
+//! @brief Deinitialize Fingerprint sensor
 //! @param[in] self Instance
 
 void bc_fingerprint_deinit(bc_fingerprint_t *self);
@@ -159,7 +165,7 @@ void bc_fingerprint_deinit(bc_fingerprint_t *self);
 
 void bc_fingerprint_set_event_handler(bc_fingerprint_t *self, void (*event_handler)(bc_fingerprint_t *, bc_fingerprint_event_t, void *), void *event_param);
 
-//! @brief Set measurement interval
+//! @brief Set update interval
 //! @param[in] self Instance
 //! @param[in] interval Measurement interval
 
@@ -172,16 +178,32 @@ void bc_fingerprint_set_update_interval(bc_fingerprint_t *self, bc_tick_t interv
 
 bool bc_fingerprint_measure(bc_fingerprint_t *self);
 
+//! @brief Start Enrolling
+//! @param[in] self Instance
 void bc_fingerprint_enroll(bc_fingerprint_t *self);
 
+//! @brief Checks the response validity
+//! @param[in] self Instance
+//! @return Type of response on Success
+//! @return FINGERPRINT_PACKETRECIEVEERR on not valid packet
 uint8_t bc_fingerprint_check_response(bc_fingerprint_t *self);
 
+//! @brief Reads packet on UART to the buffer
+//! @param[in] self Instance
+//! @return true On success
+//! @return false when the data is not long enough
 bool bc_fingerprint_read_data(bc_fingerprint_t *self);
 
+//! @brief Get number of fingers in database manually
+//! @param[in] self Instance
 void bc_fingerprint_get_template_count(bc_fingerprint_t *self);
 
+//! @brief Start reading of the finger manually
+//! @param[in] self Instance
 void bc_fingerprint_read_finger(bc_fingerprint_t *self);
 
+//! @brief Delete database manually
+//! @param[in] self Instance
 void bc_fingerprint_delete_database(bc_fingerprint_t *self);
 
 #endif // _BC_TMP112_H

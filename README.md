@@ -9,7 +9,7 @@
 
 This repository contains firmware fingerptint sensor for [Core Module](https://shop.bigclown.com/core-module).
 
-It is integration of Adafruit library for the fingerprint sensor, for more information visit their [tutorial](https://learn.adafruit.com/adafruit-optical-fingerprint-sensor?view=all).
+It is integration of [Adafruit library](https://github.com/adafruit/Adafruit-Fingerprint-Sensor-Library) for the fingerprint sensor, for more information visit their [tutorial](https://learn.adafruit.com/adafruit-optical-fingerprint-sensor?view=all).
 
 If you want to get more information about Core Module, firmware and how to work with it, please follow this link:
 

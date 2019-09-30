@@ -8,8 +8,6 @@ bc_button_t button;
 
 bc_fingerprint_t fingerprint;
 
-bc_gfx_t *gfx;
-
 bc_module_relay_t relay;
 
 bc_module_pir_t pir;
@@ -29,7 +27,6 @@ void button_event_handler(bc_button_t *self, bc_button_event_t event, void *even
 {
     if(event == BC_BUTTON_EVENT_HOLD)
     {
-        bc_log_debug("podrženo");
         bc_fingerprint_delete_database(&fingerprint);
     }
 
@@ -50,9 +47,8 @@ void lcd_event_handler(bc_module_lcd_event_t event, void *event_param)
 
 void fingerprint_event_handler(bc_fingerprint_t *self, bc_fingerprint_event_t event, void *event_param)
 {
-    if(event == BC_FINGERPRINT_EVENT_FINGERPRINT_MACHED)
+    if(event == BC_FINGERPRINT_EVENT_FINGERPRINT_MATCHED)
     {
-        bc_log_debug("%d", event_param);
         bc_radio_pub_int("finger/-/id", &event_param);
     }
     else if(event == BC_FINGERPRINT_EVENT_ENROLL_FIRST)
@@ -66,7 +62,7 @@ void fingerprint_event_handler(bc_fingerprint_t *self, bc_fingerprint_event_t ev
 
     else if(event == BC_FINGERPRINT_EVENT_DATABASE_DELETED)
     {
-        bc_log_debug("smazano");
+        bc_log_debug("deleted");
     }
 
     else if(event == BC_FINGERPRINT_EVENT_UPDATE)
@@ -87,7 +83,6 @@ void get_enroll_state(uint64_t *id, const char *topic, void *value, void *param)
 
 void finger_sensor_deinit()
 {
-    bc_log_debug("deinicializace");
     bc_fingerprint_deinit(&fingerprint);
     
     bc_module_relay_set_state(&relay, true);
@@ -142,7 +137,7 @@ void application_init(void)
 
     bc_radio_init(BC_RADIO_MODE_NODE_SLEEPING);
     bc_radio_set_subs((bc_radio_sub_t *) subs, sizeof(subs)/sizeof(bc_radio_sub_t));
-    bc_radio_set_rx_timeout_for_sleeping_node(150);
+    bc_radio_set_rx_timeout_for_sleeping_node(200);
     bc_radio_pairing_request("fingerprint-sensor", VERSION);
 
     bc_system_pll_enable();

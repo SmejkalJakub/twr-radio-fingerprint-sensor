@@ -48,7 +48,6 @@ void bc_fingerprint_init(bc_fingerprint_t *self, bc_uart_channel_t channel)
 
     bc_uart_async_read_start(self->_channel, 1000);
 
-    bc_log_debug("inicializuji");
 }
 
 void bc_fingerprint_deinit(bc_fingerprint_t *self)
@@ -123,7 +122,6 @@ bool bc_fingerprint_measure(bc_fingerprint_t *self)
 
 void bc_fingerprint_delete_database(bc_fingerprint_t *self)
 {
-    bc_log_debug("mazu");
     self->_delete = true;
 }
 
@@ -219,7 +217,7 @@ start:
 
             self->_state = BC_FINGERPRINT_STATE_PASSWORD_READ;
 
-            self->_tick_ready = bc_tick_get() + _BC_FINGERPRINT_DELAY_INITIALIZATION;
+            self->_tick_ready = bc_tick_get() + 800;
 
             if (self->_measurement_active)
             {
@@ -510,7 +508,7 @@ start:
 
                 if (self->_event_handler != NULL)
                 {
-                    self->_event_handler(self, BC_FINGERPRINT_EVENT_FINGERPRINT_MACHED, self->_finger_ID);
+                    self->_event_handler(self, BC_FINGERPRINT_EVENT_FINGERPRINT_MATCHED, self->_finger_ID);
                 }
 
                 self->_state = BC_FINGERPRINT_STATE_UPDATE;
@@ -528,7 +526,6 @@ start:
         case BC_FINGERPRINT_STATE_DELETE_DATABASE:
         {
             SEND_CMD_PACKET(FINGERPRINT_EMPTY);
-            bc_log_debug("posilam");
 
             self->_state = BC_FINGERPRINT_STATE_DELETE_DATABASE_READ;
             bc_scheduler_plan_current_from_now(_BC_FINGERPRINT_DELAY_MEASUREMENT);
@@ -545,7 +542,6 @@ start:
 
             if(self->_response == FINGERPRINT_OK)
             {
-                bc_log_debug("je cas smazat");
                 self->_delete = false;
                 if (self->_event_handler != NULL)
                 {
@@ -582,7 +578,6 @@ start:
         }
         default:
         {
-            bc_log_debug("default");
             self->_state = BC_FINGERPRINT_STATE_ERROR;
 
             goto start;
