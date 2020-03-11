@@ -2,9 +2,9 @@
 
 # Firmware Fingerprint sensor for HARDWARIO Core Module
 
-[![Travis](https://img.shields.io/travis/bigclownlabs/bcf-radio-fingerprint-sensor/master.svg)](https://travis-ci.org/bigclownlabs/bcf-radio-fingerprint-sensor)
-[![Release](https://img.shields.io/github/release/bigclownlabs/bcf-radio-fingerprint-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-fingerprint-sensor/releases)
-[![License](https://img.shields.io/github/license/bigclownlabs/bcf-radio-fingerprint-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-fingerprint-sensor/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/bigclownprojects/bcf-radio-fingerprint-sensor/master.svg)](https://travis-ci.org/bigclownprojects/bcf-radio-fingerprint-sensor)
+[![Release](https://img.shields.io/github/release/bigclownprojects/bcf-radio-fingerprint-sensor.svg)](https://github.com/bigclownprojects/bcf-radio-fingerprint-sensor/releases)
+[![License](https://img.shields.io/github/license/bigclownprojects/bcf-radio-fingerprint-sensor.svg)](https://github.com/bigclownprojects/bcf-radio-fingerprint-sensor/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/hardwario_en.svg?style=social&label=Follow)](https://twitter.com/hardwario_en)
 
 This repository contains firmware fingerptint sensor for [Core Module](https://shop.bigclown.com/core-module).
