@@ -1,17 +1,15 @@
-<a href="https://www.hardwario.com/"><img src="https://www.hardwario.com/ci/assets/hw-logo.svg" width="200" alt="BigClown Logo" align="right"></a>
+<a href="https://www.hardwario.com/"><img src="https://www.hardwario.com/ci/assets/hw-logo.svg" width="200" alt="HARDWARIO Logo" align="right"></a>
 
-# Firmware Fingerprint sensor for BigClown Core Module
+# Firmware Fingerprint sensor for HARDWARIO Core Module
 
-[![Travis](https://img.shields.io/travis/bigclownlabs/bcf-skeleton/master.svg)](https://travis-ci.org/bigclownlabs/bcf-skeleton)
-[![Release](https://img.shields.io/github/release/bigclownlabs/bcf-skeleton.svg)](https://github.com/bigclownlabs/bcf-skeleton/releases)
-[![License](https://img.shields.io/github/license/bigclownlabs/bcf-skeleton.svg)](https://github.com/bigclownlabs/bcf-skeleton/blob/master/LICENSE)
-[![Twitter](https://img.shields.io/twitter/follow/BigClownLabs.svg?style=social&label=Follow)](https://twitter.com/BigClownLabs)
+[![Travis](https://img.shields.io/travis/bigclownlabs/bcf-radio-fingerprint-sensor/master.svg)](https://travis-ci.org/bigclownlabs/bcf-radio-fingerprint-sensor)
+[![Release](https://img.shields.io/github/release/bigclownlabs/bcf-radio-fingerprint-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-fingerprint-sensor/releases)
+[![License](https://img.shields.io/github/license/bigclownlabs/bcf-radio-fingerprint-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-fingerprint-sensor/blob/master/LICENSE)
+[![Twitter](https://img.shields.io/twitter/follow/hardwario_en.svg?style=social&label=Follow)](https://twitter.com/hardwario_en)
 
 This repository contains firmware fingerptint sensor for [Core Module](https://shop.bigclown.com/core-module).
 
 It is integration of [Adafruit library](https://github.com/adafruit/Adafruit-Fingerprint-Sensor-Library) for the fingerprint sensor, for more information visit their [tutorial](https://learn.adafruit.com/adafruit-optical-fingerprint-sensor?view=all).
-
-If you want to get more information about Core Module, firmware and how to work with it, please follow this link:
 
 ## License
 
