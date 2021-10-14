@@ -1,8 +1,8 @@
-#ifndef _BC_FINGERPRINT_H
-#define _BC_FINGERPRINT_H
+#ifndef _TWR_FINGERPRINT_H
+#define _TWR_FINGERPRINT_H
 
-/*#include <bc_scheduler.h>
-#include <bc_uart.h>*/
+/*#include <twr_scheduler.h>
+#include <twr_uart.h>*/
 #include <bcl.h>
 
 
@@ -51,7 +51,7 @@
 #define FINGERPRINT_HISPEEDSEARCH 0x1B
 #define FINGERPRINT_TEMPLATECOUNT 0x1D
 
-//! @addtogroup bc_fingerprint bc_fingerprint
+//! @addtogroup twr_fingerprint twr_fingerprint
 //! @brief Driver for TMP112 temperature sensor
 //! @{
 
@@ -60,78 +60,78 @@
 typedef enum
 {
     //! @brief Error event
-    BC_FINGERPRINT_EVENT_ERROR = 0,
+    TWR_FINGERPRINT_EVENT_ERROR = 0,
 
     //! @brief Update event
-    BC_FINGERPRINT_EVENT_UPDATE = 1,
+    TWR_FINGERPRINT_EVENT_UPDATE = 1,
 
     //! @brief Template count event
-    BC_FINGERPRINT_EVENT_TEMPLATE_COUNT_READ = 2,
+    TWR_FINGERPRINT_EVENT_TEMPLATE_COUNT_READ = 2,
 
     //! @brief Fingerprints mached event
-    BC_FINGERPRINT_EVENT_FINGERPRINT_MATCHED = 3,
+    TWR_FINGERPRINT_EVENT_FINGERPRINT_MATCHED = 3,
 
     //! @brief First Finger Enroll event
-    BC_FINGERPRINT_EVENT_ENROLL_FIRST = 4,
+    TWR_FINGERPRINT_EVENT_ENROLL_FIRST = 4,
 
     //! @brief Second Finger Enroll event
-    BC_FINGERPRINT_EVENT_ENROLL_SECOND = 5,
-    
+    TWR_FINGERPRINT_EVENT_ENROLL_SECOND = 5,
+
     //! @brief Remove Finger From Sensor event
-    BC_FINGERPRINT_EVENT_REMOVE_FINGER = 6,
+    TWR_FINGERPRINT_EVENT_REMOVE_FINGER = 6,
 
     //! @brief Finger Saved event
-    BC_FINGERPRINT_EVENT_FINGER_ENROLLED = 7,
+    TWR_FINGERPRINT_EVENT_FINGER_ENROLLED = 7,
 
     //! @brief Delete Database event
-    BC_FINGERPRINT_EVENT_DATABASE_DELETED = 8
+    TWR_FINGERPRINT_EVENT_DATABASE_DELETED = 8
 
-} bc_fingerprint_event_t;
+} twr_fingerprint_event_t;
 
 //! @brief Fingerprint instance
 
-typedef struct bc_fingerprint_t bc_fingerprint_t;
+typedef struct twr_fingerprint_t twr_fingerprint_t;
 
 //! @cond
 
 typedef enum
 {
-    BC_FINGERPRINT_STATE_ERROR = -1,
-    BC_FINGERPRINT_STATE_INITIALIZE = 0,
-    BC_FINGERPRINT_STATE_PASSWORD_READ = 1, 
-    BC_FINGERPRINT_STATE_ENROLL_READ = 2,
-    BC_FINGERPRINT_STATE_IMAGE2TZ = 3,
-    BC_FINGERPRINT_STATE_IMAGE2TZ_READ = 4,
-    BC_FINGERPRINT_STATE_CREATE_MODEL = 5,
-    BC_FINGERPRINT_STATE_CREATE_MODEL_READ = 6,
-    BC_FINGERPRINT_STATE_STORE_MODEL = 7,
-    BC_FINGERPRINT_STATE_STORE_MODEL_READ = 8,
-    BC_FINGERPRINT_STATE_READING = 9,
-    BC_FINGERPRINT_STATE_GET_TEMPLATE_COUNT = 10,
-    BC_FINGERPRINT_STATE_GET_TEMPLATE_COUNT_READ = 11,
-    BC_FINGERPRINT_STATE_FINGER_SEARCH = 12,
-    BC_FINGERPRINT_STATE_FINGER_SEARCH_READ = 13,
-    BC_FINGERPRINT_STATE_DELETE_DATABASE = 14,
-    BC_FINGERPRINT_STATE_DELETE_DATABASE_READ = 15,
-    BC_FINGERPRINT_STATE_UPDATE = 16,
-    BC_FINGERPRINT_STATE_READY = 17
-} bc_fingerprint_state_t;
+    TWR_FINGERPRINT_STATE_ERROR = -1,
+    TWR_FINGERPRINT_STATE_INITIALIZE = 0,
+    TWR_FINGERPRINT_STATE_PASSWORD_READ = 1,
+    TWR_FINGERPRINT_STATE_ENROLL_READ = 2,
+    TWR_FINGERPRINT_STATE_IMAGE2TZ = 3,
+    TWR_FINGERPRINT_STATE_IMAGE2TZ_READ = 4,
+    TWR_FINGERPRINT_STATE_CREATE_MODEL = 5,
+    TWR_FINGERPRINT_STATE_CREATE_MODEL_READ = 6,
+    TWR_FINGERPRINT_STATE_STORE_MODEL = 7,
+    TWR_FINGERPRINT_STATE_STORE_MODEL_READ = 8,
+    TWR_FINGERPRINT_STATE_READING = 9,
+    TWR_FINGERPRINT_STATE_GET_TEMPLATE_COUNT = 10,
+    TWR_FINGERPRINT_STATE_GET_TEMPLATE_COUNT_READ = 11,
+    TWR_FINGERPRINT_STATE_FINGER_SEARCH = 12,
+    TWR_FINGERPRINT_STATE_FINGER_SEARCH_READ = 13,
+    TWR_FINGERPRINT_STATE_DELETE_DATABASE = 14,
+    TWR_FINGERPRINT_STATE_DELETE_DATABASE_READ = 15,
+    TWR_FINGERPRINT_STATE_UPDATE = 16,
+    TWR_FINGERPRINT_STATE_READY = 17
+} twr_fingerprint_state_t;
 
-struct bc_fingerprint_t
+struct twr_fingerprint_t
 {
-    bc_uart_channel_t _channel;
-    bc_scheduler_task_id_t _task_id_interval;
-    bc_scheduler_task_id_t _task_id_measure;
-    void (*_event_handler)(bc_fingerprint_t *, bc_fingerprint_event_t, void *);
+    twr_uart_channel_t _channel;
+    twr_scheduler_task_id_t _task_id_interval;
+    twr_scheduler_task_id_t _task_id_measure;
+    void (*_event_handler)(twr_fingerprint_t *, twr_fingerprint_event_t, void *);
     void *_event_param;
     bool _measurement_active;
     bool _enroll;
     bool _delete;
-    bc_tick_t _update_interval;
-    bc_fingerprint_state_t _state;
-    bc_tick_t _tick_ready;
+    twr_tick_t _update_interval;
+    twr_fingerprint_state_t _state;
+    twr_tick_t _tick_ready;
     uint8_t _read_fifo_buffer[128];
-    bc_fifo_t _read_fifo;
+    twr_fifo_t _read_fifo;
     uint32_t _password;
     uint8_t _buffer[16];
     size_t _length;
@@ -143,67 +143,67 @@ struct bc_fingerprint_t
 
 //! @endcond
 
-bool bc_fingerprint_write_packet(void *data, size_t len);
+bool twr_fingerprint_write_packet(void *data, size_t len);
 
 //! @brief Initialize Fingerprint sensor
 //! @param[in] self Instance
 //! @param[in] i2c_channel I2C channel
 //! @param[in] i2c_address I2C device address
 
-void bc_fingerprint_init(bc_fingerprint_t *self, bc_uart_channel_t channel);
+void twr_fingerprint_init(twr_fingerprint_t *self, twr_uart_channel_t channel);
 
 
 //! @brief Deinitialize Fingerprint sensor
 //! @param[in] self Instance
 
-void bc_fingerprint_deinit(bc_fingerprint_t *self);
+void twr_fingerprint_deinit(twr_fingerprint_t *self);
 
 //! @brief Set callback function
 //! @param[in] self Instance
 //! @param[in] event_handler Function address
 //! @param[in] event_param Optional event parameter (can be NULL)
 
-void bc_fingerprint_set_event_handler(bc_fingerprint_t *self, void (*event_handler)(bc_fingerprint_t *, bc_fingerprint_event_t, void *), void *event_param);
+void twr_fingerprint_set_event_handler(twr_fingerprint_t *self, void (*event_handler)(twr_fingerprint_t *, twr_fingerprint_event_t, void *), void *event_param);
 
 //! @brief Set update interval
 //! @param[in] self Instance
 //! @param[in] interval Measurement interval
 
-void bc_fingerprint_set_update_interval(bc_fingerprint_t *self, bc_tick_t interval);
+void twr_fingerprint_set_update_interval(twr_fingerprint_t *self, twr_tick_t interval);
 
 //! @brief Start measurement manually
 //! @param[in] self Instance
 //! @return true On success
 //! @return false When other measurement is in progress
 
-bool bc_fingerprint_measure(bc_fingerprint_t *self);
+bool twr_fingerprint_measure(twr_fingerprint_t *self);
 
 //! @brief Start Enrolling
 //! @param[in] self Instance
-void bc_fingerprint_enroll(bc_fingerprint_t *self);
+void twr_fingerprint_enroll(twr_fingerprint_t *self);
 
 //! @brief Checks the response validity
 //! @param[in] self Instance
 //! @return Type of response on Success
 //! @return FINGERPRINT_PACKETRECIEVEERR on not valid packet
-uint8_t bc_fingerprint_check_response(bc_fingerprint_t *self);
+uint8_t twr_fingerprint_check_response(twr_fingerprint_t *self);
 
 //! @brief Reads packet on UART to the buffer
 //! @param[in] self Instance
 //! @return true On success
 //! @return false when the data is not long enough
-bool bc_fingerprint_read_data(bc_fingerprint_t *self);
+bool twr_fingerprint_read_data(twr_fingerprint_t *self);
 
 //! @brief Get number of fingers in database manually
 //! @param[in] self Instance
-void bc_fingerprint_get_template_count(bc_fingerprint_t *self);
+void twr_fingerprint_get_template_count(twr_fingerprint_t *self);
 
 //! @brief Start reading of the finger manually
 //! @param[in] self Instance
-void bc_fingerprint_read_finger(bc_fingerprint_t *self);
+void twr_fingerprint_read_finger(twr_fingerprint_t *self);
 
 //! @brief Delete database manually
 //! @param[in] self Instance
-void bc_fingerprint_delete_database(bc_fingerprint_t *self);
+void twr_fingerprint_delete_database(twr_fingerprint_t *self);
 
-#endif // _BC_TMP112_H
+#endif // _TWR_TMP112_H

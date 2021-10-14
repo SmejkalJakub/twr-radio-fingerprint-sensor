@@ -6,7 +6,9 @@
 #endif
 
 #include <bcl.h>
-#include "bc_fingerprint.h"
+#include <twr.h>
+
+#include "twr_fingerprint.h"
 
 void get_enroll_state(uint64_t *id, const char *topic, void *value, void *param);
 
